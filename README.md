@@ -18,6 +18,6 @@ Nota: as imagens de teste que estão no diretório "exemplos" foram obtidas em a
 ```
 python train.py --dataset dataset --model moedas.model --labelbin lb.pickle
 ```
-dataset: é o path onde se encontra o dataset para treinamento.
-moedas.model: é o path onde será salvo o modelo treinado.
-lb.pickle: é o path onde serão salvas as labels das classes.
+- dataset: é o path onde se encontra o dataset para treinamento.
+- moedas.model: é o path onde será salvo o modelo treinado.
+- lb.pickle: é o path onde serão salvas as labels das classes.
