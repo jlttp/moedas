@@ -46,29 +46,29 @@ for image in listamoedas:
     label = lb.classes_[idx]
 
     filename = args["image"][args["image"].rfind(os.path.sep) + 1:]
-    #correct = "incorrect" if filename.rfind(label) != -1 else "correct"
-
-    #label = "{}: {:.2f}% ({})".format(label, proba[idx] * 100, correct)
     label = "{}: {:.2f}%".format(label, proba[idx] * 100)
     output = imutils.resize(output, width=400)
     cv.putText(output, label, (25, 40),  cv.FONT_HERSHEY_SIMPLEX,
         1, (255, 0, 0), 3)
 
     print("[INFO] {}".format(label))
-    #cv.imshow("Output", output)
     if "5centavos" in label:
         sum_moedas+=0.05
     if "10centavos" in label:
         sum_moedas+=0.1
     if "50centavos" in label:
         sum_moedas+=0.5
-    #plt.subplot(1, len(listamoedas), count)
-    #plt.imshow(output, cmap = 'gray')
-    #plt.title('{}'.format(count)), plt.xticks([]), plt.yticks([])
-    #count+=1
     cv.imwrite("moedas_detectadas/{}.jpg".format(uuid.uuid4()), output)
 
+scale_percent = 23 # por cento do tamanho original
+width = int(img.shape[1] * scale_percent/100)
+height = int(img.shape[0] * scale_percent/100)
+dim = (width, height)
+resized = cv.resize(img, dim, interpolation = cv.INTER_AREA)
+cv.putText(resized, "Valor Calculado: R$ {:.2f}".format(sum_moedas), (50, 70),  cv.FONT_HERSHEY_SIMPLEX,
+        2, (255, 0, 0), 3)
+cv.imwrite("moedas_detectadas/{}.jpg".format(uuid.uuid4()), resized)
+cv.imshow('Valor Calculado', resized)
 print("[INFO] SOMA MOEDAS: R$ {:.2f}".format(sum_moedas))
-#plt.savefig('moedas_encontradas.png')
-#plt.show()
 cv.waitKey(0)
+cv.destroyAllWindows()
